@@ -38,10 +38,18 @@ function islandora_videojs_preprocess_islandora_videojs(array &$variables) {
   $params = $variables['params'];
   $variables['tn'] = $params['tn'];
   $videojs_path = libraries_get_path("video-js");
-  drupal_add_js($videojs_path . "/video.js");
+  //drupal_add_js($videojs_path . "/video.js");
+  drupal_add_js('//vjs.zencdn.net/4.9/video.js', 'external');
   drupal_add_css($videojs_path . '/video-js.css');
 
   $variables['sources'][] = array('url' => $params['url'], 'mime' => $params['mime']);
+  // HACKED BY ROSIE FIXME
+  $object = $variables['object'];
+  $variables['tracks'] = array();
+  if (isset($object['WEBVTT']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object['WEBVTT'])) {
+    $variables['tracks'][] = url("islandora/object/{$object->id}/rawdatastream/WEBVTT");
+  }
+
 }
 
 /**
@@ -50,6 +58,6 @@ function islandora_videojs_preprocess_islandora_videojs(array &$variables) {
  * @param array $params
  *   Array with configuration info for the audio player.
  */
-function islandora_videojs_callback($params = array()) {
-  return theme('islandora_videojs', array('params' => $params));
+function islandora_videojs_callback($params = array(), $object = NULL) {
+  return theme('islandora_videojs', array('params' => $params, 'object' => $object));
 }
