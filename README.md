@@ -16,7 +16,9 @@ Install as usual, see [this](https://drupal.org/documentation/install/modules-th
 
 [Download](http://www.videojs.com/downloads/video-js-4.0.0.zip) and install [video.js](http://www.videojs.com/) to your sites/libraries folder, or run `drush videojs-plugin`. 
 
-**Note** This viewer has been tested with video.js 4.0.0.
+**Note** This viewer has been tested with video.js 4.0.0 and 4.12.11.
+
+**Note** Some features of video.js (such as rtmp streaming) only work with newer versions of video.js. If you encounter errors with streaming sources, try updating the video.js library. 
 
 **Note** If you use the Drush command, it is advisable to Move (not copy) the install script to your `.drush` folder and run it.
 
